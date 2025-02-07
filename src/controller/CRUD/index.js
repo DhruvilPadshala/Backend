@@ -12,6 +12,7 @@ const createUser = (req, res) => {
     return;
   }
 };
+
 // Fetch all users
 const fetchUsers = async (req, res) => {
   try {
