@@ -5,6 +5,21 @@ const {
   deleteUser,
   fetchUserById,
 } = require("../controller/CRUD");
+const {
+  fetchSchool,
+  createSchool,
+  updateSchool,
+  deleteSchool,
+  fetchSchoolById,
+} = require("../controller/school");
+const {
+  fetchStudent,
+  createStudent,
+  updateStudent,
+  deleteStudent,
+  fetchStudentById,
+} = require("../controller/student");
+
 const { login, signup } = require("../controller/auth");
 const { createform } = require("../controller/form");
 
@@ -39,5 +54,21 @@ router.post("/signup", signup);
 // form routes
 
 router.post("/form", upload.single("image"), createform);
+
+// school routes
+
+router.get("/school", fetchSchool);
+router.post("/school", createSchool);
+router.put("/school/:id", updateSchool);
+router.delete("/school/:id", deleteSchool);
+router.get("/school/:id", fetchSchoolById);
+
+// student routes
+
+router.get("/student", fetchStudent);
+router.post("/student", createStudent);
+router.put("/student/:id", updateStudent);
+router.delete("/student/:id", deleteStudent);
+router.get("/student/:id", fetchStudentById);
 
 module.exports = router;
