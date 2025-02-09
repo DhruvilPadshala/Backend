@@ -1,10 +1,10 @@
-const User = require("../../model/userModel");
+const Test = require("../../model/testModel");
 
 // Create a new user
 const createUser = (req, res) => {
   try {
     let users = req.body;
-    const newusers = new User(users);
+    const newusers = new Test(users);
     newusers.save();
     res.status(200).json({ data: users, message: "User created successfully" });
   } catch (error) {
@@ -16,7 +16,7 @@ const createUser = (req, res) => {
 // Fetch all users
 const fetchUsers = async (req, res) => {
   try {
-    const users = await User.find({});
+    const users = await Test.find({});
     res
       .status(200)
       .json({ data: users, message: "Users fetched successfully" });
@@ -30,7 +30,7 @@ const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const updatedUser = req.body;
-    const user = await User.findByIdAndUpdate(id, updatedUser, { new: true });
+    const user = await Test.findByIdAndUpdate(id, updatedUser, { new: true });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -44,7 +44,7 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedUser = await User.findByIdAndDelete(id);
+    const deletedUser = await Test.findByIdAndDelete(id);
     if (!deletedUser) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -60,7 +60,7 @@ const deleteUser = async (req, res) => {
 const fetchUserById = async (req, res) => {
   try {
     const { id } = req.params;
-    const user = await User.findById(id);
+    const user = await Test.findById(id);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
