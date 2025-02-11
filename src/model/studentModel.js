@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const studentSchema = new mongoose.Schema({
   studentName: {
     type: String,
-    required: true,
+    required: [true, "Student name is required"],
   },
   email: {
     type: String,

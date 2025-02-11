@@ -22,6 +22,13 @@ const {
 
 const { login, signup } = require("../controller/auth");
 const { createform } = require("../controller/form");
+const {
+  postarray,
+  getarray,
+  getarrayById,
+  updatearrayById,
+  deletearrayById,
+} = require("../controller/array");
 
 const express = require("express");
 const router = express.Router();
@@ -70,5 +77,13 @@ router.post("/student", createStudent);
 router.put("/student/:id", updateStudent);
 router.delete("/student/:id", deleteStudent);
 router.get("/student/:id", fetchStudentById);
+
+// array routes
+
+router.post("/array", postarray);
+router.get("/array", getarray);
+router.get("/array/:id", getarrayById);
+router.put("/array/:id", updatearrayById);
+router.delete("/array/:id", deletearrayById);
 
 module.exports = router;

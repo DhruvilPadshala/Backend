@@ -26,11 +26,18 @@ const createStudent = async (req, res) => {
     });
     await student.save();
 
-    const populatedStudent = await Student.findById(student._id).populate(
-      "schoolref"
-    );
+    // const populatedSchool = await Student.findById(student._id).populate(
+    //   "schoolref"
+    // );
+
+    const populatedStudent = await Student.findById(student._id).populate({
+      path: "schoolref",
+      select: "-__v",
+    });
+
+    const populatedSchool = populatedStudent.toObject();
     res.status(201).json({
-      student: populatedStudent,
+      student: populatedSchool,
       message: "Student created successfully",
     });
   } catch (error) {
