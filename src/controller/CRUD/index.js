@@ -21,7 +21,7 @@ const fetchUsers = async (req, res) => {
       .status(200)
       .json({ data: users, message: "Users fetched successfully" });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error, error: "Internal server error" });
   }
 };
 

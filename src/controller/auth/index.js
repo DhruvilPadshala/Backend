@@ -40,8 +40,8 @@ const login = async (req, res) => {
 const signup = async (req, res) => {
   const { email, password, fullname, phone, address, gender } = req.body;
   try {
-    const finduser = await User.findOne({ email });
-    if (finduser) {
+    const findUser = await User.findOne({ email });
+    if (findUser) {
       return res.status(409).json({ error: "User already exists" });
     }
 

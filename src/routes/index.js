@@ -19,15 +19,14 @@ const {
   deleteStudent,
   fetchStudentById,
 } = require("../controller/student");
-
 const { login, signup } = require("../controller/auth");
-const { createform } = require("../controller/form");
+const { createForm } = require("../controller/form");
 const {
-  postarray,
-  getarray,
-  getarrayById,
-  updatearrayById,
-  deletearrayById,
+  postArray,
+  getArray,
+  getArrayById,
+  updateArrayById,
+  deleteArrayById,
 } = require("../controller/array");
 
 const express = require("express");
@@ -60,7 +59,7 @@ router.post("/signup", signup);
 
 // form routes
 
-router.post("/form", upload.single("image"), createform);
+router.post("/form", upload.single("image"), createForm);
 
 // school routes
 
@@ -80,10 +79,10 @@ router.get("/student/:id", fetchStudentById);
 
 // array routes
 
-router.post("/array", postarray);
-router.get("/array", getarray);
-router.get("/array/:id", getarrayById);
-router.put("/array/:id", updatearrayById);
-router.delete("/array/:id", deletearrayById);
+router.post("/array", postArray);
+router.get("/array", getArray);
+router.get("/array/:id", getArrayById);
+router.put("/array/:id", updateArrayById);
+router.delete("/array/:id", deleteArrayById);
 
 module.exports = router;

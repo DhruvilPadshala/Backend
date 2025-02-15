@@ -1,15 +1,15 @@
 const Form = require("../../model/formModel");
 
-const createform = async (req, res) => {
+const createForm = async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: "No file uploaded" });
   }
 
   const { name, email, phone, message, date } = req.body;
 
-  const emailfind = await Form.findOne({ email });
+  const emailFind = await Form.findOne({ email });
 
-  if (emailfind) {
+  if (emailFind) {
     return res.status(400).json({ error: "Email already exists" });
   }
 
@@ -31,4 +31,4 @@ const createform = async (req, res) => {
   }
 };
 
-module.exports = { createform };
+module.exports = { createForm };

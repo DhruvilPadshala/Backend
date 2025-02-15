@@ -1,7 +1,7 @@
 const Array = require("../../model/arrayModel");
 
 // Create a new array
-const postarray = async (req, res) => {
+const postArray = async (req, res) => {
   try {
     const data = req.body;
     const insertedData = await Array.insertMany(data);
@@ -16,16 +16,38 @@ const postarray = async (req, res) => {
 };
 
 // Fetch all arrays
-const getarray = async (req, res) => {
+const getArray = async (req, res) => {
   try {
-    const arrays = await Array.find();
-    res.json(arrays);
+    let { page, pageSize, search, gender } = req.query;
+    page = parseInt(page) || 1;
+    pageSize = parseInt(pageSize) || 10;
+    const skip = (page - 1) * pageSize;
+    let query = {};
+    if (search) {
+      query = {
+        $or: [{ name: { $regex: search, $options: "i" } }],
+      };
+    }
+    if (gender && ["male", "female"].includes(gender.toLowerCase())) {
+      query.gender = gender.toLowerCase();
+    }
+    const searchQuery = await Array.find(query).skip(skip).limit(pageSize);
+    const totalCount = await Array.countDocuments(query);
+    const pageData = searchQuery.length;
+    res.status(200).json({
+      data: searchQuery,
+      message: "Data fetched successfully",
+      totalCount: totalCount,
+      pagedata: pageData,
+      PageSize: page,
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
 // Fetch a single array by ID
-const getarrayById = async (req, res) => {
+const getArrayById = async (req, res) => {
   try {
     const array = await Array.findById(req.params.id);
     if (!array) {
@@ -39,7 +61,7 @@ const getarrayById = async (req, res) => {
 
 // Update an array by ID
 
-const updatearrayById = async (req, res) => {
+const updateArrayById = async (req, res) => {
   try {
     const updatedArray = await Array.findByIdAndUpdate(
       req.params.id,
@@ -56,7 +78,7 @@ const updatearrayById = async (req, res) => {
 };
 
 // Delete an array by ID
-const deletearrayById = async (req, res) => {
+const deleteArrayById = async (req, res) => {
   try {
     const deletedArray = await Array.findByIdAndDelete(req.params.id);
     if (!deletedArray) {
@@ -71,9 +93,9 @@ const deletearrayById = async (req, res) => {
 };
 
 module.exports = {
-  postarray,
-  getarray,
-  getarrayById,
-  updatearrayById,
-  deletearrayById,
+  postArray,
+  getArray,
+  getArrayById,
+  updateArrayById,
+  deleteArrayById,
 };
