@@ -73,8 +73,7 @@ const signup = async (req, res) => {
       message: "User created successfully",
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error, error: "Internal Server Error" });
   }
 };
 function createToken(userData) {
