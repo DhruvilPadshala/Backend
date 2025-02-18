@@ -28,6 +28,7 @@ const {
   updateArrayById,
   deleteArrayById,
 } = require("../controller/array");
+const { uploadCsv } = require("../controller/upload-csv");
 
 const express = require("express");
 const router = express.Router();
@@ -77,12 +78,16 @@ router.put("/student/:id", updateStudent);
 router.delete("/student/:id", deleteStudent);
 router.get("/student/:id", fetchStudentById);
 
-// array routes
+// array data routes
 
 router.post("/array", postArray);
 router.get("/array", getArray);
 router.get("/array/:id", getArrayById);
 router.put("/array/:id", updateArrayById);
 router.delete("/array/:id", deleteArrayById);
+
+// upload csv file
+
+router.post("/upload", upload.single(), uploadCsv);
 
 module.exports = router;
