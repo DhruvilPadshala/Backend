@@ -19,7 +19,12 @@ const {
   deleteStudent,
   fetchStudentById,
 } = require("../controller/student");
-const { login, signup } = require("../controller/auth");
+const {
+  login,
+  signup,
+  sendResetPassMail,
+  updatePassword,
+} = require("../controller/auth");
 const { createForm } = require("../controller/form");
 const {
   postArray,
@@ -57,6 +62,8 @@ router.get("/users/:id", fetchUserById);
 
 router.post("/login", login);
 router.post("/signup", signup);
+router.post("/send-mail", sendResetPassMail);
+router.post("/forgot-password", updatePassword);
 
 // form routes
 

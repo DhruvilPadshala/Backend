@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const generateCode = require("../utils/codeGenerate");
 
 const userSchema = new mongoose.Schema({
   fullname: {
